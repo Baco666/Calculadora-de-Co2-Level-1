@@ -1,0 +1,115 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #4CAF50;
+  padding: 20px;
+  text-align: center; /* Center the header */
+}
+
+header h1 {
+  color: white;
+  margin: 0;
+  text-align: center; /* Center the header */
+}
+
+main {
+  padding: 20px;
+  max-width: 700px;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center the main content */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label,
+select,
+button {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+input[type="text"] {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Make the transportation mode input field fill the form box */
+  box-sizing: border-box;
+  margin: 0 0 10px 0;
+}
+
+input[type="text"] + label {
+  width: 100%;
+  text-align: left; /* Left-align the label */
+  padding-right: 0; /* Remove the right padding */
+}
+
+label {
+  width: 50%;
+  text-align: left;
+  padding-right: 10px;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: left;
+}
+
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px auto; /* Add some margin to the button */
+  transition-duration: 0.4s;
+  border-radius: 4px;
+  width: calc(50% - 12px); /* Reduce the button width to half */
+  box-sizing: border-box;
+  clear: both;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+footer {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+    <title>Vehicle CO2 Calculator</title>
+  </head>
+  <body>
+    <h1>Calculadora de CO<sub>2</sub> de um veículo (Vehicle CO<sub>2</sub>  Calculator) - Level 1 <br>
+     </h2>Análise das emissões de CO<sub>2</sub> diretas de um Veículo ou Equipamento portuário (Vehicle or Port's Handling Equipments direct CO<sub>2</sub> emissions analysis)
+    </h2>
+  </body>
+  <main>
+    <form>
+      <p>
+        Selecione um modo de transporte (Please select a transportation mode)
+      </p>
+      <select id="mode-select" style="max-width:600px">
+        <option value="">-- Selecione (Please select) --</option>
+        <option value="ship">Marítimo (Maritime)</option>
+        <option value="train">Ferroviário (Railway)</option>
+        <option value="road">Rodoviário (Road)</option>
+        <option value="portEquiment">
+          Equipamentos Portuários (Handling equipments)
+        </option>
+      </select>
+      
+      <div id="shipInputs" class="form-group">
+        <p>Preencha os dados do transporte marítimo (Enter maritime transport details):</p>
+        <label for="ship-type">Tipo de Navio (Ship Type):</label>
+        <select id="ship-type">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="tanker">Navio-Tanque (Tanker)</option>
+          <option value="bulk-carrier">Graneleiro (Bulk carrier)</option>
+          <option value="container-ship">Navio de contentores (Container ship)</option>
+          <option value="general-cargo-ship">Navio de carga geral (General cargo ship)</option>
+          <option value="ro-ro-ship">Cargueiro Ro-Ro (Ro-Ro ship)</option>
+          <option value="fishing-ship">Embarcação de pesca (Fishing vessel)</option>
+          <option value="port-vessel">Embarcação portuária (Port vessel)</option>
+        </select>
+        <label for="fuel-type">Tipo de combustível (Fuel type):</label>
+        <select id="fuel-type">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="MDO/MGO">Diesel marítimo (MDO)</option>
+          <option value="LPG">Gás liquefeito de petróleo (Liquefied petroleum gas)</option>
+          <option value="methanol">Metanol (Methanol)</option>
+          <option value="BFO">Fuelóleo pesado (Heavy Fuel Oil)</option>
+          <option value="ecoBunkers">Biodiesel mix B15</option>
+          <option value="ucome">Biodiesel B100</option>
+          
+        </select>
+        <label for="ship-size">Arqueação Bruta (Gross tonnage)[GT]:</label>
+        <input type="number" id="ship-size" min="1" />
+
+        
+
+        <label for="motor-type">Tipo de motor (Motor type):</label>
+        <select id="motor-type"
+        name="motor-type"
+        onchange="showShipSpeedInput()">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="steam">Turbina a vapor (Steam turbine)</option>
+          <option value="diesel">Motor a Diesel (Diesel engine)</option>
+        </select>
+   
+        <label for="days-at-sea">Duração da viagem (Trip duration) [days]:</label>
+        <input type="number" id="days-at-sea" min="1" step="1"/>
+        
+        <div id="engineSpeedInput" style="display: none">
+        <label for="ship-speed">
+            Velocidade de operação do motor principal (Main engine operation speed):</label>
+        <select id="ship-speed">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="slow">Lento (Slow)</option>
+          <option value="medium">Médio (Medium)</option>
+          <option value="fast">Rápido (Fast)</option>
+        </select>
+        </div>
+      </div>
+      <div id="roadInputs">
+        <p>Preencha os dados do transporte rodoviário (Enter Road transport details):</p>
+        <label for="vehicleType">Tipo de veículo (Vehicle type):</label>
+        <select name="vehicleType" id="vehicleType">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="passengerCar">Veículo ligeiro de passageiros (Light passenger car)</option>
+          <option value="lightCommercial">Veículo ligeiro de mercadorias (Light commercial vehicle)</option>
+          <option value="heavyCommercial">
+            Veículo pesado de mercadorias (Heavy Commercial Vehicle)
+          </option></select
+        ><br />
+        <label for="vehicleFuelType">Tipo de combustível (Fuel type):</label>
+        <select name="vehicleFuelType" id="vehicleFuelType" onchange="showRoadElectricInputs()">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="dieselB7">Diesel B7</option>
+          <option value="dieselB15">Biodiesel mix B15</option>
+          <option value="bioDiesel">Biodiesel B100</option>
+          <option value="gasolineE10">Gasolina E10</option>
+          <option value="gasolineE85">Gasolina mix E85</option>
+          <option value="lpg">Gás liquefeito de petróleo (Liquefied petroleum gas)</option>
+          <option value="cng">Gás natural comprimido (CNG)</option>
+          <option value="eletric">Elétrico (Full Electric)</option></select
+        ><br />
+        <label for="vehicleDistance">Distância percorrida (Distance traveled) [km]:</label>
+        <input
+          type="number"
+          id="vehicleDistance"
+          name="vehicleDistance"
+          min="1"
+        /><br />
+        <div id="electricInputs" style="display: none">
+          <p>Preencha os dados do veículo elétrico (Enter electric details):</p>
+          <label for="vehiclePower">Potência do veículo (Vehicle power) [kW]:</label>
+          <input type="number" id="vehiclePower" name="vehiclePower" min="1" /><br />
+
+          <label for="travelTime">Tempo de viagem (Travel time) [hr]:</label>
+          <input type="number" id="travelTime" name="travelTime"  min="1"step="1"/><br />
+        </div>
+      </div>
+      <div id="trainInputs">
+        <p>Preencha os dados do transporte ferroviário (Enter Train transport details):</p>
+        <label for="trainHoras">Duração da viagem (Trip duration) [hr]:</label>
+        <input type="number" id="trainHoras" name="trainHoras" min="1"step="1" /><br />
+        <label for="trainFuel">Tipo de combustível (Fuel type):</label>
+        <select name="trainFuel" id="trainFuel">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="diesel">Diesel mix B7</option>
+          <option value="eletricity">Eletricidade (Electricity)</option>
+          <option value="biodiesel">Biodiesel B100</option></select
+        ><br />
+        <label for="trainLoad">Fator de carga (Load Factor): </label>
+        <select name="trainLoad" id="trainLoad">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="full">Locomotiva cheia (Full Locomotive)</option>
+          <option value="half">Locomotiva meia cheia (Half-full Locomotive)</option>
+          <option value="empty">Locomotiva vazia (Empty Locomotive)</option>
+        </select>
+        <label for="trainPower">Potência da locomotiva<br /> (Locomotive power)[kW]:</label>
+        <input type="number" id="trainPower" name="trainPower" min="1" /><br />
+      </div>
+
+      <div id="equipmentInputs">
+        <p>Preencha os dados do transporte non-road (Enter Non-Road transport details):</p>
+        <label for="equipmentType">Tipo de combustível (Fuel type):</label>
+        <select
+          name="equipmentType"
+          id="equipmentType"
+          onchange="showEngineSize()">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="diesel">Diesel mix B7</option>
+          <option value="B15">Diesel mix B15</option>
+          <option value="B100">Biodiesel mix B100</option>
+          <option value="gasoline2stroke">Gasolina (2 Stroke)</option>
+          <option value="gasoline4stroke">Gasolina (4 Stroke)</option>
+          <option value="LPG">Gás natural Liquifeito (Liquefied petroleum gas)</option>
+          <option value="eletricity">Eletricidade (Electricity)</option>
+          </select>
+        <br />
+        <label for="equipmentActivity">Horas de trabalho (Hours of Work):</label>
+        <input
+          type="number"
+          id="equipmentActivity"
+          name="equipmentActivity"
+          min="1"
+          step="1"
+        /><br />
+        <label for="equipmentPower">Potência do motor (Power of the motor) [kW]:</label>
+        <input type="number" id="equipmentPower" name="equipmentPower" min="1"/><br />
+        <label for="equipmentYear">Ano de registo (Year of registration):</label>
+        <input type="number" id="equipmentYear" name="equipmentYear" min="1" max="2024" step="1"/><br />
+        <div id="engineSizeInput" style="display: none">
+          <label for="engineSize">Tamanho do motor (Engine Size) [CC]:</label>
+          <input type="number" id="engineSize" name="engineSize" min="1" /><br />
+        </div>
+        <label for="equiLoad">Fator de carga (Load Factor) </label>
+        <select name="equiLoad" id="equiLoad">
+          <option value="">-- Selecione (Please select) --</option>
+          <option value="full">Equipamento cheio (Full)</option>
+          <option value="half">Equipamento meio-cheio (Half-full)</option>
+          <option value="empty">Equipamento vazio (Empty)</option>
+        </select>
+      </div>
+
+      <script>
+        function showEngineSize() {
+          const equipmentType = document.getElementById("equipmentType").value;
+          const engineSizeInput = document.getElementById("engineSizeInput");
+          if (
+            equipmentType === "gasoline2stroke" ||
+            equipmentType === "gasoline4stroke"
+          ) {
+            engineSizeInput.style.display = "block";
+          } else {
+            engineSizeInput.style.display = "none";
+          }
+        }
+        function showShipSpeedInput() {
+            const motorType = document.getElementById("motor-type").value;
+            const engineSpeedInput = document.getElementById("engineSpeedInput");
+    if (
+        motorType === "diesel"
+    ) {
+        engineSpeedInput.style.display = "block";
+  } else {
+    engineSpeedInput.style.display = "none";
+  }
+}
+function showRoadElectricInputs(){
+  const vehicleFuelType =document.getElementById("vehicleFuelType").value;
+  const electricInputs = document.getElementById("electricInputs");
+  if (
+    vehicleFuelType === "eletric"
+  ){
+    electricInputs.style.display = "block";
+  }else {
+    electricInputs.style.display = "none"
+  }
+}
+      </script>
+
+      <button id="calculateButton" type="button">Calcular (Calculate)</button>
+      <p id="emissionsResult"></p>
+    </form>
+    
+  </main>
+  <button id="level2Button" type="button">Nível 2 (Level 2)</button>
+  <button id="level3Button" type="button">Nível 3 (Level 3)</button>
+</html>
